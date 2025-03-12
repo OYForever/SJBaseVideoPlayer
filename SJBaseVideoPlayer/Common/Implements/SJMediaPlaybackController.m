@@ -96,6 +96,7 @@ NS_ASSUME_NONNULL_BEGIN
             break;
         case SJPlaybackTimeControlStatusPlaying: {
             __weak typeof(self) _self = self;
+            [_currentTimeRefreshTimer invalidate];
             _currentTimeRefreshTimer = [NSTimer sj_timerWithTimeInterval:_interval repeats:YES usingBlock:^(NSTimer * _Nonnull timer) {
                 __strong typeof(_self) self = _self;
                 if ( !self ) { [timer invalidate]; return ; }
