@@ -94,6 +94,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) BOOL automaticallyHidesPlaceholderImageView;
 
 ///
+/// 将要隐藏占位图时, 是否采用动画
+///
+///         default value is YES
+///
+@property (nonatomic) BOOL animatedForHiddenPlaceholderImageView;
+
+///
 /// 将要隐藏占位图时, 延迟多少秒才去隐藏
 ///
 ///         default value is 0.8s

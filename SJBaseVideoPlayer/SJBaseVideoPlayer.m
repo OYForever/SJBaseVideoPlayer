@@ -61,6 +61,7 @@ typedef struct _SJPlayerControlInfo {
 
     struct {
         BOOL automaticallyHides;
+        BOOL animatedHidden;
         NSTimeInterval delayHidden;
     } placeholder;
     
@@ -195,6 +196,7 @@ typedef struct _SJPlayerControlInfo {
     if ( !self ) return nil;
     _controlInfo = (_SJPlayerControlInfo *)calloc(1, sizeof(struct _SJPlayerControlInfo));
     _controlInfo->placeholder.automaticallyHides = YES;
+    _controlInfo->placeholder.animatedHidden = YES;
     _controlInfo->placeholder.delayHidden = 0.8;
     _controlInfo->scrollControl.pausedWhenScrollDisappeared = YES;
     _controlInfo->scrollControl.hiddenPlayerViewWhenScrollDisappeared = YES;
@@ -697,7 +699,7 @@ typedef struct _SJPlayerControlInfo {
     if ( _playbackController.isReadyForDisplay ) {
         if ( _controlInfo->placeholder.automaticallyHides ) {
             NSTimeInterval delay = _URLAsset.original != nil ? 0 : _controlInfo->placeholder.delayHidden;
-            BOOL animated = _URLAsset.original == nil;
+            BOOL animated = _URLAsset.original == nil ? NO : _controlInfo->placeholder.animatedHidden;
             [self.presentView hidePlaceholderImageViewAnimated:animated delay:delay];
         }
     }
@@ -871,6 +873,12 @@ typedef struct _SJPlayerControlInfo {
     return _controlInfo->placeholder.automaticallyHides;
 }
 
+- (void)setAnimatedForHiddenPlaceholderImageView:(BOOL)animated {
+    _controlInfo->placeholder.animatedHidden = animated;
+}
+- (BOOL)animatedForHiddenPlaceholderImageView {
+    return _controlInfo->placeholder.animatedHidden;
+}
 
 - (void)setDelayInSecondsForHiddenPlaceholderImageView:(NSTimeInterval)delayHidden {
     _controlInfo->placeholder.delayHidden = delayHidden;
