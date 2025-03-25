@@ -1277,7 +1277,7 @@ typedef struct _SJPlayerControlInfo {
     }
     
     if ( secs > self.playbackController.duration ) {
-        secs = self.playbackController.duration * 0.98;
+        secs = self.playbackController.duration;
     }
     else if ( secs < 0 ) {
         secs = 0;
